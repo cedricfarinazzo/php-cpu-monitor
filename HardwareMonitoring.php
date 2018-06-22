@@ -68,10 +68,11 @@ class HardwareMonitoring
         $idle = $arr[5];
         //Does some calculations now to work out what percentage of time the CPU has been in use over the given time period.
         $intervalTotal = intval($total - $prevTotal);
-        $this->_cpu_usage = $intervalTotal;
+        $this->_cpu_usage = $intervalTotal/100;
 
         //RamUsage
         $this->_ram_usage = shell_exec("free | grep Mem | awk '{print $3/$2 * 100.0}'");
+        $this->_ram_usage = (int)str_replace('\n', '', $this->_ram_usage);
 
         //CpuTemp
         try

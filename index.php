@@ -2,24 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
      <head>
 	  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-          <title>CPU Monitor by Steve Stone</title>
-	  <link rel="stylesheet" href="css/mon.css" type="text/css" />
+          <title>Hardware Monitor</title>
+	  <link rel="stylesheet" href="css/style.css" type="text/css" />
 	  <script src="http://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script>
 	  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js" type="text/javascript"></script>
 	  <script src="js/cpufunctions.js" type="text/javascript"></script>
      </head>
      <body>
-	  <div class="left">Current monitor interval:&nbsp;</div>
-          <div id="timeBox" class="left">0.5 Seconds</div><br />
-        
-          <form action="javascript:void(0)">
-               <input id="radio01" type="radio" name="speed" value="0.1" onclick="changeSeconds(this)" />0.1
-               <input id="radio05" type="radio" name="speed" value="0.5" onclick="changeSeconds(this)" checked="checked" />0.5
-               <input id="radio1" type="radio" name="speed" value="1" onclick="changeSeconds(this)" />1
-               <input id="radio5" type="radio" name="speed" value="5" onclick="changeSeconds(this)" />5
-               <input id="radio10" type="radio" name="speed" value="10" onclick="changeSeconds(this)" />10
-          </form>
-        
           <div id="tabs" class="tabbg" style="border: 1px solid grey">
                <ul>
                     <li><a href="#tabs-3">Overview</a></li>
