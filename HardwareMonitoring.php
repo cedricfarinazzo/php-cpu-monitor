@@ -96,7 +96,16 @@ class HardwareMonitoring
         }
 
         //GpuTemp
-
+        try
+        {
+            if (file_exists('/opt/vc/bin/vcgencmd') && exec('opt/vc/bin/vcgencmd measure_temp', $tgpu)) {
+                $this->_gpu_temp = (int)str_replace('°C', '', $tgpu);
+            }
+        }
+        catch (Exception $exception)
+        {
+            $this->_gpu_temp = 0;
+        }
     }
 
     // Region:   Getters
