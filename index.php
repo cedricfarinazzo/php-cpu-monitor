@@ -4,8 +4,8 @@
         <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
         <title>Hardware Monitor</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" />
-        <script src="http://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script>
-        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js" type="text/javascript"></script>
         <script src="js/cpufunctions.js" type="text/javascript"></script>
     </head>
 
