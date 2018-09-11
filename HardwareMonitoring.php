@@ -71,8 +71,19 @@ class HardwareMonitoring
         $this->_cpu_usage = $intervalTotal/100;
 
         //RamUsage
-        $this->_ram_usage = shell_exec("free | grep Mem | awk '{print $3/$2 * 100.0}'");
-        $this->_ram_usage = (int)str_replace('\n', '', $this->_ram_usage);
+        #Check for buffers/cache
+        $ram = shell_exec("free");
+        if (strpos($ram, "buffers/cache:")){
+            $totalRam = shell_exec("free | grep Mem | awk '{print $2}'");
+            $availableRam = shell_exec("free | grep buffers/cache | awk '{print $4}'");
+            $freeRam = $totalRam - $availableRam;
+            $this->_ram_usage =  $freeRam/$totalRam * 100.0;
+            $this->_ram_usage = (int)str_replace('\n', '', $this->_ram_usage);
+        }
+        else {
+            $this->_ram_usage = shell_exec("free | grep Mem | awk '{print $3/$2 * 100.0}'");
+            $this->_ram_usage = (int)str_replace('\n', '', $this->_ram_usage);
+        }
 
         //CpuTemp
         try

@@ -38,7 +38,7 @@
 
                 <div class="grid half">&nbsp;
                     <div class="left">
-                        <b>&nbsp;CPU Temperatur:</b>&nbsp;
+                        <b>&nbsp;CPU Temperature:</b>&nbsp;
                     </div>
                     <div id="cputemp" class="left">&nbsp;</div>
                     <div class="left">°C</div>
