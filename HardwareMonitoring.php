@@ -53,22 +53,24 @@ class HardwareMonitoring
     public function GetData($speed = 1)
     {
         //cpu usage
-        $prevVal = shell_exec("cat /proc/stat");
+        $prevVal = shell_exec("sed -n 's/^cpu\s//p' /proc/stat");
         $prevArr = explode(' ',trim($prevVal));
         //Gets some values from the array and stores them.
-        $prevTotal = $prevArr[2] + $prevArr[3] + $prevArr[4] + $prevArr[5];
-        $prevIdle = $prevArr[5];
+        $prevTotal = array_sum($prevArr);
+        $prevIdle = $prevArr[3] + $prevArr[4];
+        $prevTotal = $prevTotal - $prevIdle;
         //Wait a period of time until taking the readings again to compare with previous readings.
         usleep($speed * 1000000);
         //Does the same as before.
-        $val = shell_exec("cat /proc/stat");
+        $val = shell_exec("sed -n 's/^cpu\s//p' /proc/stat");
         $arr = explode(' ',trim($val));
         //Same as before.
-        $total = $arr[2] + $arr[3] + $arr[4] + $arr[5];
-        $idle = $arr[5];
+        $total = array_sum($arr);
+        $idle = $arr[3] + $arr[4];
+        $total = $total - $idle;
         //Does some calculations now to work out what percentage of time the CPU has been in use over the given time period.
         $intervalTotal = intval($total - $prevTotal);
-        $this->_cpu_usage = $intervalTotal/100;
+        $this->_cpu_usage = $intervalTotal;
 
         //RamUsage
         #Check for buffers/cache
@@ -76,6 +78,7 @@ class HardwareMonitoring
         if (strpos($ram, "buffers/cache:")){
             $totalRam = shell_exec("free | grep Mem | awk '{print $2}'");
             $availableRam = shell_exec("free | grep buffers/cache | awk '{print $4}'");
+            $totalRam = intval($totalRam); $availableRam = intval($availableRam);
             $freeRam = $totalRam - $availableRam;
             $this->_ram_usage =  $freeRam/$totalRam * 100.0;
             $this->_ram_usage = (int)str_replace('\n', '', $this->_ram_usage);
