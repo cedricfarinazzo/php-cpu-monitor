@@ -38,7 +38,14 @@ function update(json)
     $("#cpuO").html(data["CpuUsage"]);
     cpuUsage[39] = $("#cpu").html();
     $("#ram").html(data["RamUsage"]);
-    cpuWidth[39] = cpuUsage[39] * 2.3 + 5, 10;
+    if (cpuUsage[39] > 100)
+    {
+        cpuWidth[39] = 100 * 2.3 + 5, 10;
+    }
+    else
+    {
+        cpuWidth[39] = cpuUsage[39] * 2.3 + 5, 10;
+    }
     ramUsage[39] = $("#ram").html();
     $("#ramO").html(ramUsage[39]);
     ramWidth[39] = ramUsage[39] * 2.3 + 5, 10;
